@@ -13,7 +13,7 @@ def export_to_json(channel_id: int, token: str) -> str:
     relative_path = 'app/api/endpoints/DiscordChatExporter.Cli/DiscordChatExporter.Cli.sh'
     command = f"./{relative_path} export -t \"{token}\" -c {channel_id} -f Json --after \"{formatted_date}\" -o my_channel.json"
     print(command)
-    result = subprocess.run(command, shell=True, capture_output=True, text=True)
+    result = subprocess.run(command, shell=False, capture_output=True, text=True)
     print(result.stdout)
     if result.returncode != 0:
         raise HTTPException(status_code=500, detail=f"Exporting channel failed {result.stderr}")
